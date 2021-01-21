@@ -1,83 +1,61 @@
-export default function formulario() {
-    return (
-      <></>
-  //       <div>
-  //           <div class="container">
-  //               <div class="mt10">
-  //                   <Button
-  //                       label="Voltar para Listagem"
+import React, { useState } from 'react'
+import BButton from "./../../components/BButton/BButton";
+import Input from "./../../components/Input/Input";
+import AlertBox from "./../../components/AlertBox/AlertBox";
+import './formSafra.css'
 
-  //                   ></Button>
-  //               </div>
-  //           </div>
-  //           <div class="boxColor">
-  //               <div class="boxCenter">
-  //                   {/* <div v-if="errors.length > 0">
-  //         <div v-for="error in errors" :key="error">
-  //           <AlertErro :error="error" classe="alert alert-danger"></AlertErro>
-  //         </div>
-  //       </div> */}
-  //                   <form > {/*@submit.prevent="saveUser"*/}
-  //         <Input
-  //                       type="email"
-  //                       v-model="data.email"
-  //                       placeholder="eren.yeager@gmail.com"
-  //                       label="E-mail:"
-  //           // :disabled="!!this.data._id"
-  //           // :removeSpaces="true"
-  //         />
-  //         <Input
-  //                       type="text"
-  //                       placeholder="(00) 0 0000-0000"
-  //                       label="Celular:"
-  //                       v-mask="mask"
-  //                       v-model="data.celular"
-  //                   />
-  //                   <div>
-  //                       <Input
-  //                           type="password"
-  //                           label="Senha Atual:"
-  //                           v-model="data.senhaAtual"
-  //           //   :removeSpaces="true"
-  //             autocomplete="on"
-  //           />
-  //         </div>
-  //                   <div >
-  //                       <Input
-  //                           type="password"
-  //                           label="Senha:"
-  //                           // v-model="data.senha"
-  //           //   :removeSpaces="true"
-  //             autocomplete="on"
-  //           />
-  //           <Input
-  //                           type="password"
-  //                           label="Confirme senha:"
-  //                           // v-model="data.cSenha"
-  //           //   :removeSpaces="true"
-  //             autocomplete="on"
-  //           />
-  //         </div>
-  //                   <div class="mt10">
-  //                       <div v-if="data._id" class="mb10">
-  //                           <Button
-  //               // :label="
-  //               //   editarSenha ? 'Cancelar edição de senha' : 'Editar senha'
-  //               // "
-  //               variant="info"
-  //               // :onClickFunction="trocaSenha"
-  //             ></Button>
-  //                   </div>
-  //                   <Button label="Salvar" type="submit"></Button>
-  //                   <Button
-  //                       label="Limpar Campos"
-  //                       variant="secondary"
-  //           //   :onClickFunction="limparCampos"
-  //           ></Button>
-  //           </div >
-  //       </form >
-  //     </div >
-  //   </div >
-  // </div >
-    )
+const Formulario = ({ history }) => {
+  const [nome, setNome] = useState('')
+  // const [txtAno, setAno] = useState('')
+  // const [erros, setErros] = useState([])
+
+  // const sendRequest = () => {
+  // console.log(txtNome, txtAno)
+  // erros.push('Não foi enviado o request')
+  // }
+
+  return (
+    <div>
+      <div className="container">
+        <div className="mt10">
+          <BButton
+            label="Voltar para Listagem"
+            onClick={() => history.push('/')}
+          ></BButton>
+        </div>
+      </div>
+      <div className="boxColor">
+        <div className="boxCenter">
+          {/* {erros.map(erro => <AlertBox
+            label={erro}
+          ></AlertBox>)} */}
+          <form>
+            <Input
+              type="text"
+              className="form-control"
+              placeholder=""
+              label="Nome: "
+            // onChange={setNome}
+            />
+            <Input
+              type="text"
+              className="form-control"
+              placeholder={`ex: ${new Date().getFullYear()}`}
+              label="Ano: "
+            // onChange={setAno}
+            />
+            <div className="mt10">
+              <BButton label="Salvar" type="submit" ></BButton>
+              <BButton
+                label="Limpar Campos"
+                variant="secondary"
+              ></BButton>
+            </div >
+          </form >
+        </div >
+      </div >
+    </div >
+  )
 }
+
+export default Formulario

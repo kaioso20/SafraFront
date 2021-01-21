@@ -10,7 +10,6 @@ function Routes() {
             <Switch>
                 <Route exact path='/' render={ListSafra} />
                 <Route path='/cadastro' render={FormSafra} />
-                <Route path='/edicao' render={FormSafra} />
             </Switch>
         </BrowserRouter>
     )

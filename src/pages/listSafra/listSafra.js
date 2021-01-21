@@ -1,7 +1,6 @@
 import './listSafra.css'
 import BButton from '../../components/BButton/BButton'
 import CardUser from '../../components/CardUser/CardUser'
-import { Link } from 'react-router-dom'
 
 const safrasFake = [
     { nome: 'Safra 01', ano: 2021, idSafra: 1 },
