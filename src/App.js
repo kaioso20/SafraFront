@@ -1,12 +1,11 @@
-import ListSafra from './pages/listSafra/listSafra'
-
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Routes from './routes/routes';
 
 function App() {
   return (
     <div>
-      <ListSafra />
+      <Routes />
     </div>
   );
 }
