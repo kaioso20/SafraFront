@@ -1,18 +1,62 @@
 import React, { useState } from 'react'
+import api from '../../actions/apiAxios'
 import BButton from "./../../components/BButton/BButton";
 import Input from "./../../components/Input/Input";
 import AlertBox from "./../../components/AlertBox/AlertBox";
 import './formSafra.css'
 
-const Formulario = ({ history }) => {
-  const [nome, setNome] = useState('')
-  // const [txtAno, setAno] = useState('')
-  // const [erros, setErros] = useState([])
+function Formulario({ history }) {
 
-  // const sendRequest = () => {
-  // console.log(txtNome, txtAno)
-  // erros.push('Não foi enviado o request')
-  // }
+  const [txtNome, setNome] = useState('')
+  const [txtAno, setAno] = useState(0)
+  const [erros, setErros] = useState([])
+
+  const hundleNomeChange = (e) => {
+    setNome(e.target.value)
+  }
+
+  const hundleAnoChange = (e) => {
+    setAno(parseInt(e.target.value || 0))
+  }
+
+  const sendRequest = () => {
+    setErros([])
+    let errosAtuais = validation()
+    setErros(errosAtuais)
+    if (errosAtuais.length > 0) return
+    MakeRequest()
+    setErros(errosAtuais)
+  }
+
+  const MakeRequest = () => {
+    api.post('/Safra',
+      {
+        Nome: txtNome,
+        Ano: txtAno
+      }, [])
+      .then((response) => {
+        const { success, msg } = response
+        if (!success) errosAtuais.push(msg)
+      })
+  }
+
+  const validation = () => {
+
+    let erros = []
+
+    if (!!!txtNome && !!!txtAno) {
+      erros.push('A safra necessita de nome e ano')
+      return erros
+    }
+
+    if (!!!txtNome) {
+      erros.push('A safra necessita de nome')
+    } else if (!!!txtAno || txtAno === 0) {
+      erros.push('A safra necessita de ano')
+    }
+
+    return erros
+  }
 
   return (
     <div>
@@ -26,26 +70,27 @@ const Formulario = ({ history }) => {
       </div>
       <div className="boxColor">
         <div className="boxCenter">
-          {/* {erros.map(erro => <AlertBox
+          <h1>Safra</h1>
+          {erros.map(erro => <AlertBox
             label={erro}
-          ></AlertBox>)} */}
+          ></AlertBox>)}
           <form>
             <Input
               type="text"
               className="form-control"
               placeholder=""
               label="Nome: "
-            // onChange={setNome}
+              onChange={hundleNomeChange}
             />
             <Input
               type="text"
               className="form-control"
               placeholder={`ex: ${new Date().getFullYear()}`}
               label="Ano: "
-            // onChange={setAno}
+              onChange={hundleAnoChange}
             />
             <div className="mt10">
-              <BButton label="Salvar" type="submit" ></BButton>
+              <BButton label="Salvar" onClick={() => sendRequest()} ></BButton>
               <BButton
                 label="Limpar Campos"
                 variant="secondary"

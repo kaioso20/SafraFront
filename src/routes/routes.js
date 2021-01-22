@@ -8,8 +8,8 @@ function Routes() {
     return (
         <BrowserRouter>
             <Switch>
-                <Route exact path='/' render={ListSafra} />
-                <Route path='/cadastro' render={FormSafra} />
+                <Route exact path='/' component={ListSafra} />
+                <Route path='/cadastro' component={FormSafra} />
             </Switch>
         </BrowserRouter>
     )
